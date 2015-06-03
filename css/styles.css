@@ -2,12 +2,15 @@
   width: 450px;
   margin: auto;
   font-size: 128px;
+  align: center;
+  background-color: #647678;
 }
 
 .row {
   width: 450px;
   border-top: 1px solid black;
   border-bottom: 1px solid black;
+  margin: 0px;
 }
 
 .col-sm-4 {
@@ -28,4 +31,31 @@
   display:none;
   text-align: center;
   margin-top: 25px;
+}
+
+.lead{
+  font-size: 9em;
+  color: #D5FBFF;
+}
+
+body {
+  cursor: url('../img/tic.png'), default;
+  background-color: #2F3738;
+  color: #D5FBFF;
+}
+
+.tic {
+
+}
+
+
+.X {
+  cursor: url('../img/x.png'), default;
+
+
+}
+
+.O {
+  cursor: url('../img/circle.png'), default;
+
 }

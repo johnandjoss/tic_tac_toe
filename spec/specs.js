@@ -24,4 +24,16 @@ describe('Board', function() {
     expect(board.spaces()).to.equal(9);
   });
 
+  it("will mark a space on the board with an X or O", function() {
+    var board = new Board(3);
+    board.mark(1, 2, "X")
+    expect(board.isMarked(1, 2)).to.equal("X")
+  });
+
+  it("will tell if a player has marked space on board", function() {
+    var board = new Board(3);
+    board.mark(1, 2, "X")
+    expect(board.isMarked(1, 2)).to.equal("X")
+  });
+
 });

@@ -30,3 +30,17 @@ Board.prototype.spaces = function() {
   });
   return totalSpaces;
 };
+
+Board.prototype.mark = function (xcoord, ycoord, mark) {
+  if (!(this.isMarked(xcoord, ycoord))) {
+    this.board[xcoord][ycoord] = mark
+  }
+};
+
+Board.prototype.isMarked = function (xcoord, ycoord) {
+  if (this.board[xcoord][ycoord] !== null) {
+    return (this.board[xcoord][ycoord])
+  } else {
+    return false;
+  }
+};

@@ -65,5 +65,36 @@ describe("Game", function() {
     game.board.mark(1, 2, "X");
     game.board.mark(2, 2, "X");
     expect(game.winner()).to.eql(game.player1)
+  });
+
+  it("has a function to check for a winner vertically", function() {
+    var game = new Game(3);
+    game.board.mark(1, 0, "X");
+    game.board.mark(1, 1, "X");
+    game.board.mark(1, 2, "X");
+    expect(game.winner()).to.eql(game.player1)
   })
+
+  it("has a function to check for a winner diagonally", function() {
+    var game = new Game(3);
+    game.board.mark(0, 0, "X");
+    game.board.mark(1, 1, "X");
+    game.board.mark(2, 2, "X");
+    expect(game.winner()).to.eql(game.player1)
+  });
+
+  it("has a function to check for a draw", function(){
+    var game = new Game(3);
+    game.board.mark(0, 0, "X");
+    game.board.mark(1, 0, "O");
+    game.board.mark(2, 0, "X");
+    game.board.mark(0, 1, "X");
+    game.board.mark(1, 1, "O");
+    game.board.mark(2, 1, "O");
+    game.board.mark(0, 2, "O");
+    game.board.mark(1, 2, "X");
+    game.board.mark(2, 2, "X");
+    expect(game.winner()).to.equal("Draw")
+  });
+
 });

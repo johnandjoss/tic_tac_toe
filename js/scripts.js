@@ -81,29 +81,77 @@ Game.prototype.changeTurn = function () {
   this.player2.toggleTurn();
 };
 
+// Game.prototype.winner = function() {
+//   var board = this.board.board
+//   var winner = false
+//   if (((board[0][0]) === board[1][0]) && ((board[2][0])) === (board[0][0])) {
+//     if (this.player1.mark === board[0][0]) {
+//       winner = this.player1
+//     } else if (this.player2.mark === board[0][0]){
+//       winner = this.player2
+//     }
+//   }
+//   if (((board[0][1]) === board[1][1]) && ((board[2][1])) === (board[0][1])) {
+//     if(this.player1.mark === board[0][1]) {
+//       winner = this.player1
+//     } else if (this.player2.mark === board[0][1]){
+//       winner = this.player2
+//     }
+//   }
+//   if (((board[0][2]) === board[1][2]) && ((board[2][2])) === (board[0][2])) {
+//     if(this.player1.mark === board[0][2]) {
+//       winner = this.player1
+//     } else if (this.player2.mark === board[0][2]){
+//       winner = this.player2
+//     }
+//   }
+//   return winner
+// }
+
 Game.prototype.winner = function() {
-  var board = this.board.board
-  var winner = false
-  if (((board[0][0]) === board[1][0]) && ((board[2][0])) === (board[0][0])) {
-    if (this.player1.mark === board[0][0]) {
+  var gameBoard = this.board.board;
+  var winner = false;
+
+  for (var y = 0; y < this.board.sideLength; y++) {
+    if (((gameBoard[0][y]) === (gameBoard[1][y])) && ((gameBoard[2][y]) === (gameBoard[0][y]))) {
+      if (this.player1.mark === gameBoard[0][y]) {
+        winner = this.player1;
+      } else if (this.player2.mark === gameBoard[0][y]){
+        winner = this.player2;
+      }
+    }
+  }
+
+  for (var x = 0; x < this.board.sideLength; x++) {
+    if (((gameBoard[x][0]) === (gameBoard[x][1])) && ((gameBoard[x][2]) === (gameBoard[x][0]))) {
+      if (this.player1.mark === gameBoard[x][0]) {
+        winner = this.player1;
+      } else if (this.player2.mark === gameBoard[x][0]){
+        winner = this.player2;
+      }
+    }
+  }
+
+  if ((((gameBoard[0][0]) === gameBoard[1][1]) && ((gameBoard[2][2])) === (gameBoard[0][0])) || (((gameBoard[0][2]) === gameBoard[1][1]) && ((gameBoard[2][0])) === (gameBoard[0][2]))) {
+    if(this.player1.mark === gameBoard[1][1]) {
       winner = this.player1
-    } else if (this.player2.mark === board[0][0]){
+    } else if (this.player2.mark === gameBoard[1][1]){
       winner = this.player2
     }
   }
-  if (((board[0][1]) === board[1][1]) && ((board[2][1])) === (board[0][1])) {
-    if(this.player1.mark === board[0][1]) {
-      winner = this.player1
-    } else if (this.player2.mark === board[0][1]){
-      winner = this.player2
+  if (winner === false) {
+    for (var x = 0; x < gameBoard.length; x++) {
+      for (var y = 0; y < gameBoard.length; y++) {
+        if (gameBoard[x][y] === null) {
+          winner = false;
+          break;
+        } else {
+          winner = "Draw"
+        }
+      }
     }
   }
-  if (((board[0][2]) === board[1][2]) && ((board[2][2])) === (board[0][2])) {
-    if(this.player1.mark === board[0][2]) {
-      winner = this.player1
-    } else if (this.player2.mark === board[0][2]){
-      winner = this.player2
-    }
-  }
-  return winner
+
+
+  return winner;
 }

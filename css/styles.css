@@ -49,7 +49,7 @@ border-color: #647678;
 }
 
 .lead{
-  font-size: 9em;
+  font-size: 72px;
   color: #D5FBFF;
 }
 
@@ -62,11 +62,12 @@ body {
 
 .X {
   cursor: url('../img/x.png'), default;
-
-
 }
 
 .O {
   cursor: url('../img/circle.png'), default;
+}
 
+#reset {
+  display: none;
 }

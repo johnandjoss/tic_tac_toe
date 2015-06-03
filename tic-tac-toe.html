@@ -7,6 +7,44 @@
     <script src="js/scripts.js"></script>
   </head>
   <body>
+    <div class="container text-center">
+      <div id="board">
+        <div class="row">
+          <div class="col-sm-4" id="top-left">
+          </div>
+          <div class="col-sm-4" id="top-mid">
+          </div>
+          <div class="col-sm-4" id="top-right">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4" id="mid-left">
+          </div>
+          <div class="col-sm-4" id="mid-mid">
+          </div>
+          <div class="col-sm-4" id="mid-right">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4" id="bottom-left">
+          </div>
+          <div class="col-sm-4" id="bottom-mid">
+          </div>
+          <div class="col-sm-4" id="bottom-right">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container text-center">
+      <button class="btn btn-primary btn-lg" id="play"> Play! </button>
+      <button class="btn btn-danger btn-lg" id="reset"> Reset! </button>
+    </div>
+    <div id="players">
+      <h1></h1> <!-- will show whose turn it is -->
 
+    </div>
+    <div id="results">
+      <p class="lead"><span id="winner"></span></p>
+    </div>
   </body>
 </html>

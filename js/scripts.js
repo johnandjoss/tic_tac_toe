@@ -100,7 +100,7 @@ Game.prototype.winner = function() {
       }
     }
   }
-// if statement to check for diagonal winner
+// if statement to check for diagonal winner x+y = 4
   if ((((gameBoard[0][0]) === gameBoard[1][1]) && ((gameBoard[2][2])) === (gameBoard[0][0])) || (((gameBoard[0][2]) === gameBoard[1][1]) && ((gameBoard[2][0])) === (gameBoard[0][2]))) {
     if(this.player1.mark === gameBoard[1][1]) {
       winner = this.player1
@@ -122,3 +122,13 @@ Game.prototype.winner = function() {
   }
   return winner;
 }
+$(document).ready(function() {
+  $("button#play").click(function() {
+    var game = new Game(3)
+    var player1 = game.player1
+    var player2 = game.player2
+    var board = game.board
+    $("#players").show();
+    $("#players h1").text("Player" + " " + game.whoseTurn().mark + "'s Turn!");
+  });
+})

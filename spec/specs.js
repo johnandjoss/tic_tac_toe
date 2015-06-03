@@ -19,11 +19,6 @@ describe('Player', function() {
 });
 
 describe('Board', function() {
-  it("is initialized with nine spaces", function() {
-    var board = new Board(3);
-    expect(board.spaces()).to.equal(9);
-  });
-
   it("will mark a space on the board with an X or O", function() {
     var board = new Board(3);
     board.mark(1, 2, "X");

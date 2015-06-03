@@ -29,16 +29,6 @@ function Board(sideLength) {
   this.board = board
 };
 
-//spaces will return the total number of spaces on the board.
-
-Board.prototype.spaces = function() {
-  var totalSpaces = null;
-  this.board.forEach(function(space) {
-    totalSpaces += space.length;
-  });
-  return totalSpaces;
-};
-
 //mark will mark a (x, y) coord with the passed in character ("X" or "O")
 
 Board.prototype.mark = function (xcoord, ycoord, mark) {
@@ -57,7 +47,7 @@ Board.prototype.isMarked = function (xcoord, ycoord) {
   }
 };
 
-//
+//Game constructor will create two players and a board.
 
 function Game(boardSize) {
   var player1 = new Player("X", true);
@@ -68,6 +58,8 @@ function Game(boardSize) {
   this.board = board
 };
 
+//whoseTurn will return which player currently has an active turn
+
 Game.prototype.whoseTurn = function () {
    if (this.player1.isActive){
      return this.player1
@@ -76,43 +68,20 @@ Game.prototype.whoseTurn = function () {
    }
 };
 
+//changeTurn will change toggle both player's active check
+
 Game.prototype.changeTurn = function () {
   this.player1.toggleTurn();
   this.player2.toggleTurn();
 };
 
-// Game.prototype.winner = function() {
-//   var board = this.board.board
-//   var winner = false
-//   if (((board[0][0]) === board[1][0]) && ((board[2][0])) === (board[0][0])) {
-//     if (this.player1.mark === board[0][0]) {
-//       winner = this.player1
-//     } else if (this.player2.mark === board[0][0]){
-//       winner = this.player2
-//     }
-//   }
-//   if (((board[0][1]) === board[1][1]) && ((board[2][1])) === (board[0][1])) {
-//     if(this.player1.mark === board[0][1]) {
-//       winner = this.player1
-//     } else if (this.player2.mark === board[0][1]){
-//       winner = this.player2
-//     }
-//   }
-//   if (((board[0][2]) === board[1][2]) && ((board[2][2])) === (board[0][2])) {
-//     if(this.player1.mark === board[0][2]) {
-//       winner = this.player1
-//     } else if (this.player2.mark === board[0][2]){
-//       winner = this.player2
-//     }
-//   }
-//   return winner
-// }
+//winner will return if there is a player who has won the game
 
 Game.prototype.winner = function() {
   var gameBoard = this.board.board;
   var winner = false;
-
-  for (var y = 0; y < this.board.sideLength; y++) {
+// loop to check for horizontal winner
+  for (var y = 0; y < gameBoard.length; y++) {
     if (((gameBoard[0][y]) === (gameBoard[1][y])) && ((gameBoard[2][y]) === (gameBoard[0][y]))) {
       if (this.player1.mark === gameBoard[0][y]) {
         winner = this.player1;
@@ -121,8 +90,8 @@ Game.prototype.winner = function() {
       }
     }
   }
-
-  for (var x = 0; x < this.board.sideLength; x++) {
+// loop to check for vertical winner
+  for (var x = 0; x < gameBoard.length; x++) {
     if (((gameBoard[x][0]) === (gameBoard[x][1])) && ((gameBoard[x][2]) === (gameBoard[x][0]))) {
       if (this.player1.mark === gameBoard[x][0]) {
         winner = this.player1;
@@ -131,7 +100,7 @@ Game.prototype.winner = function() {
       }
     }
   }
-
+// if statement to check for diagonal winner
   if ((((gameBoard[0][0]) === gameBoard[1][1]) && ((gameBoard[2][2])) === (gameBoard[0][0])) || (((gameBoard[0][2]) === gameBoard[1][1]) && ((gameBoard[2][0])) === (gameBoard[0][2]))) {
     if(this.player1.mark === gameBoard[1][1]) {
       winner = this.player1
@@ -139,11 +108,11 @@ Game.prototype.winner = function() {
       winner = this.player2
     }
   }
+// loop to check if draw has occurred
   if (winner === false) {
     for (var x = 0; x < gameBoard.length; x++) {
       for (var y = 0; y < gameBoard.length; y++) {
         if (gameBoard[x][y] === null) {
-          winner = false;
           break;
         } else {
           winner = "Draw"
@@ -151,7 +120,5 @@ Game.prototype.winner = function() {
       }
     }
   }
-
-
   return winner;
 }

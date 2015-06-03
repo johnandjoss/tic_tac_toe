@@ -18,9 +18,24 @@
   border-left: 1px solid black;
 }
 
+.btn, .btn:visited {
+  background-color: #59D8E5;
+  border-color: #59D8E5;
+}
+
+.btn:hover, .btn:active {
+background-color: #647678;
+border-color: #647678;
+}
+
+#top-left:hover, #top-mid:hover, #top-right:hover, #mid-left:hover, #mid-mid:hover, #mid-right:hover, #bottom-left:hover, #bottom-mid:hover, #bottom-right:hover{
+  background-color: #EEFFFC;
+
+}
 #top-left, #top-mid, #top-right, #mid-left, #mid-mid, #mid-right, #bottom-left, #bottom-mid, #bottom-right{
   height:150px;
   width:150px;
+  color: #59D8E5;
 }
 
 .container {
@@ -42,12 +57,8 @@ body {
   cursor: url('../img/tic.png'), default;
   background-color: #2F3738;
   color: #D5FBFF;
+  font-family: "Lucida Console", Monaco, monospace	;
 }
-
-.tic {
-
-}
-
 
 .X {
   cursor: url('../img/x.png'), default;

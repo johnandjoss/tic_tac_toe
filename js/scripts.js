@@ -1,17 +1,17 @@
 //Player contructor creates the player with a set mark ("X" or "O") and active state (true or false)
 
 function Player(mark, active) {
-  this.mark = mark
-  this.isActive = active
+  this.mark = mark;
+  this.isActive = active;
 };
 
 //toggleTurn will switch a player's active state to the opposite of its current
 
 Player.prototype.toggleTurn = function() {
   if (this.isActive === false) {
-    this.isActive = true
+    this.isActive = true;
   } else {
-    this.isActive = false
+    this.isActive = false;
   }
 };
 
@@ -21,19 +21,19 @@ function Board(sideLength) {
   this.sideLength = sideLength;
   var board = [];
   for (var x = 0; x < sideLength; x++) {
-    board.push([])
+    board.push([]);
     for (var y = 0; y < sideLength; y++) {
-      board[x].push(null)
+      board[x].push(null);
     }
   }
-  this.board = board
+  this.board = board;
 };
 
 //mark will mark a (x, y) coord with the passed in character ("X" or "O")
 
 Board.prototype.mark = function (xcoord, ycoord, mark) {
   if (!(this.isMarked(xcoord, ycoord))) {
-    this.board[xcoord][ycoord] = mark
+    this.board[xcoord][ycoord] = mark;
   }
 };
 
@@ -41,7 +41,7 @@ Board.prototype.mark = function (xcoord, ycoord, mark) {
 
 Board.prototype.isMarked = function (xcoord, ycoord) {
   if (this.board[xcoord][ycoord] !== null) {
-    return (this.board[xcoord][ycoord])
+    return (this.board[xcoord][ycoord]);
   } else {
     return false;
   }
@@ -53,18 +53,18 @@ function Game(boardSize) {
   var player1 = new Player("X", true);
   var player2 = new Player("O", false);
   var board = new Board(boardSize);
-  this.player1 = player1
-  this.player2 = player2
-  this.board = board
+  this.player1 = player1;
+  this.player2 = player2;
+  this.board = board;
 };
 
 //whoseTurn will return which player currently has an active turn
 
 Game.prototype.whoseTurn = function () {
    if (this.player1.isActive){
-     return this.player1
+     return this.player1;
    } else {
-     return this.player2
+     return this.player2;
    }
 };
 
@@ -103,9 +103,9 @@ Game.prototype.winner = function() {
 // if statement to check for diagonal winner x+y = 4
   if ((((gameBoard[0][0]) === gameBoard[1][1]) && ((gameBoard[2][2])) === (gameBoard[0][0])) || (((gameBoard[0][2]) === gameBoard[1][1]) && ((gameBoard[2][0])) === (gameBoard[0][2]))) {
     if(this.player1.mark === gameBoard[1][1]) {
-      winner = this.player1
+      winner = this.player1;
     } else if (this.player2.mark === gameBoard[1][1]){
-      winner = this.player2
+      winner = this.player2;
     }
   }
 // loop to check if draw has occurred
@@ -116,7 +116,7 @@ Game.prototype.winner = function() {
           return false;
           break;
         } else {
-          winner = "Draw"
+          winner = "Draw";
         }
       }
     }
@@ -128,153 +128,205 @@ $(document).ready(function() {
   $("button#play").click(function() {
     // $(window.location.replace("https://www.youtube.com/watch?v=dQw4w9WgXcQ"));
     var game = new Game(3)
-    var board = game.board
+    var board = game.board;
     $("body").toggleClass(game.whoseTurn().mark);
     $("#players").show();
     $("#players h1").text("Player" + " " + game.whoseTurn().mark + "'s Turn!");
 
     $("#top-left").click(function() {
-
-      if (!(board.isMarked(0, 0))) {
-        game.board.mark(0, 0, game.whoseTurn().mark)
-        $("#top-left").text(game.whoseTurn().mark)
-        if (game.winner()) {
-          $("#results").slideDown("slow")
-          $("#winner").text("Player" + " " + game.whoseTurn().mark + " WINS!")
+      debugger;
+      if ((!(board.isMarked(0, 0))) && (game.winner() === false)) {
+        game.board.mark(0, 0, game.whoseTurn().mark);
+        $("#top-left").text(game.whoseTurn().mark);
+        if ((game.winner()) === "Draw") {
+          $("#results").slideDown("slow");
+          $("#winner").text("It's a Draw!");
+        } else if (game.winner()){
+          $("#results").slideDown("slow");
+          $("#winner").text("Player" + " " + game.whoseTurn().mark + " WINS!");
         }
       game.changeTurn()
       $("#players h1").text("Player" + " " + game.whoseTurn().mark + "'s Turn!");
       $("body").removeClass();
       $("body").toggleClass(game.whoseTurn().mark);
+      if (game.winner()) {
+        $("#players").hide();
+      }
+
       }
     });
 
     $("#top-mid").click(function() {
-      if (!(board.isMarked(0, 1))) {
-        game.board.mark(0, 1, game.whoseTurn().mark)
-        $("#top-mid").text(game.whoseTurn().mark)
-        if (game.winner()) {
-          $("#results").slideDown("slow")
-          $("#winner").text("Player" + " " + game.whoseTurn().mark + " WINS!")
+      if ((!(board.isMarked(0, 1))) && (game.winner() === false)) {
+        game.board.mark(0, 1, game.whoseTurn().mark);
+        $("#top-mid").text(game.whoseTurn().mark);
+        if ((game.winner()) === "Draw") {
+          $("#results").slideDown("slow");
+          $("#winner").text("It's a Draw!");
+        } else if (game.winner()){
+          $("#results").slideDown("slow");
+          $("#winner").text("Player" + " " + game.whoseTurn().mark + " WINS!");
         }
       game.changeTurn()
       $("#players h1").text("Player" + " " + game.whoseTurn().mark + "'s Turn!");
       $("body").removeClass();
       $("body").toggleClass(game.whoseTurn().mark);
+      if (game.winner()) {
+        $("#players").hide();
+      }
       }
     });
 
     $("#top-right").click(function() {
-      if (!(board.isMarked(0, 2))) {
-        game.board.mark(0, 2, game.whoseTurn().mark)
-        $("#top-right").text(game.whoseTurn().mark)
-        if (game.winner()) {
-          $("#results").slideDown("slow")
-          $("#winner").text("Player" + " " + game.whoseTurn().mark + " WINS!")
+      if ((!(board.isMarked(0, 2))) && (game.winner() === false)) {
+        game.board.mark(0, 2, game.whoseTurn().mark);
+        $("#top-right").text(game.whoseTurn().mark);
+        if ((game.winner()) === "Draw") {
+          $("#results").slideDown("slow");
+          $("#winner").text("It's a Draw!");
+        } else if (game.winner()) {
+          $("#results").slideDown("slow");
+          $("#winner").text("Player" + " " + game.whoseTurn().mark + " WINS!");
         }
-      game.changeTurn()
-      $("#players h1").text("Player" + " " + game.whoseTurn().mark + "'s Turn!");
-      $("body").removeClass();
-      $("body").toggleClass(game.whoseTurn().mark);
+        game.changeTurn();
+        $("#players h1").text("Player" + " " + game.whoseTurn().mark + "'s Turn!");
+        $("body").removeClass();
+        $("body").toggleClass(game.whoseTurn().mark);
+        if (game.winner()) {
+          $("#players").hide();
+        }
       }
     });
 
     $("#mid-left").click(function() {
-      if (!(board.isMarked(1, 0))) {
-        game.board.mark(1, 0, game.whoseTurn().mark)
-        $("#mid-left").text(game.whoseTurn().mark)
-        debugger;
-        if (game.winner()) {
-          $("#results").slideDown("slow")
-          $("#winner").text("Player" + " " + game.whoseTurn().mark + " WINS!")
+      if ((!(board.isMarked(1, 0))) && (game.winner() === false)) {
+        game.board.mark(1, 0, game.whoseTurn().mark);
+        $("#mid-left").text(game.whoseTurn().mark);
+        if ((game.winner()) === "Draw") {
+          $("#results").slideDown("slow");
+          $("#winner").text("It's a Draw!");
+        } else if (game.winner()) {
+          $("#results").slideDown("slow");
+          $("#winner").text("Player" + " " + game.whoseTurn().mark + " WINS!");
         }
-        game.changeTurn()
+        game.changeTurn();
         $("#players h1").text("Player" + " " + game.whoseTurn().mark + "'s Turn!");
         $("body").removeClass();
         $("body").toggleClass(game.whoseTurn().mark);
+        if (game.winner()) {
+          $("#players").hide();
+        }
       }
     });
 
     $("#mid-mid").click(function() {
-      if (!(board.isMarked(1, 1))) {
-        game.board.mark(1, 1, game.whoseTurn().mark)
-        $("#mid-mid").text(game.whoseTurn().mark)
-        if (game.winner()) {
-          $("#results").slideDown("slow")
-          $("#winner").text("Player" + " " + game.whoseTurn().mark + " WINS!")
+      if ((!(board.isMarked(1, 1))) && (game.winner() === false)) {
+        game.board.mark(1, 1, game.whoseTurn().mark);
+        $("#mid-mid").text(game.whoseTurn().mark);
+        if ((game.winner()) === "Draw") {
+          $("#results").slideDown("slow");
+          $("#winner").text("It's a Draw!");
+        } else if (game.winner()) {
+          $("#results").slideDown("slow");
+          $("#winner").text("Player" + " " + game.whoseTurn().mark + " WINS!");
         }
-        game.changeTurn()
+        game.changeTurn();
         $("#players h1").text("Player" + " " + game.whoseTurn().mark + "'s Turn!");
         $("body").removeClass();
         $("body").toggleClass(game.whoseTurn().mark);
+        if (game.winner()) {
+          $("#players").hide();
+        }
       }
     });
 
     $("#mid-right").click(function() {
-      if (!(board.isMarked(1, 2))) {
-        game.board.mark(1, 2, game.whoseTurn().mark)
-        $("#mid-right").text(game.whoseTurn().mark)
-        if (game.winner()) {
-          $("#results").slideDown("slow")
-          $("#winner").text("Player" + " " + game.whoseTurn().mark + " WINS!")
+      if ((!(board.isMarked(1, 2))) && (game.winner() === false)) {
+        game.board.mark(1, 2, game.whoseTurn().mark);
+        $("#mid-right").text(game.whoseTurn().mark);
+        if ((game.winner()) === "Draw") {
+          $("#results").slideDown("slow");
+          $("#winner").text("It's a Draw!");
+        } else if (game.winner()) {
+          $("#results").slideDown("slow");
+          $("#winner").text("Player" + " " + game.whoseTurn().mark + " WINS!");
         }
-        game.changeTurn()
+        game.changeTurn();
         $("#players h1").text("Player" + " " + game.whoseTurn().mark + "'s Turn!");
         $("body").removeClass();
         $("body").toggleClass(game.whoseTurn().mark);
+        if (game.winner()) {
+          $("#players").hide();
+        }
       }
     });
 
     $("#bottom-left").click(function() {
-      if (!(board.isMarked(2, 0))) {
-        game.board.mark(2, 0, game.whoseTurn().mark)
-        $("#bottom-left").text(game.whoseTurn().mark)
-        if (game.winner()) {
-          $("#results").slideDown("slow")
-          $("#winner").text("Player" + " " + game.whoseTurn().mark + " WINS!")
+      if ((!(board.isMarked(2, 0))) && (game.winner() === false)) {
+        game.board.mark(2, 0, game.whoseTurn().mark);
+        $("#bottom-left").text(game.whoseTurn().mark);
+        if ((game.winner()) === "Draw") {
+          $("#results").slideDown("slow");
+          $("#winner").text("It's a Draw!");
+        } else if (game.winner()) {
+          $("#results").slideDown("slow");
+          $("#winner").text("Player" + " " + game.whoseTurn().mark + " WINS!");
         }
-        game.changeTurn()
+        game.changeTurn();
         $("#players h1").text("Player" + " " + game.whoseTurn().mark + "'s Turn!");
         $("body").removeClass();
         $("body").toggleClass(game.whoseTurn().mark);
+        if (game.winner()) {
+          $("#players").hide();
+        }
       }
     });
 
     $("#bottom-mid").click(function() {
-      if (!(board.isMarked(2, 1))) {
-        game.board.mark(2, 1, game.whoseTurn().mark)
-        $("#bottom-mid").text(game.whoseTurn().mark)
-        if (game.winner()) {
-          $("#results").slideDown("slow")
-          $("#winner").text("Player" + " " + game.whoseTurn().mark + " WINS!")
+      if ((!(board.isMarked(2, 1))) && (game.winner() === false)) {
+        game.board.mark(2, 1, game.whoseTurn().mark);
+        $("#bottom-mid").text(game.whoseTurn().mark);
+        if ((game.winner()) === "Draw") {
+          $("#results").slideDown("slow");
+          $("#winner").text("It's a Draw!");
+        } else if (game.winner()) {
+          $("#results").slideDown("slow");
+          $("#winner").text("Player" + " " + game.whoseTurn().mark + " WINS!");
         }
-        game.changeTurn()
+        game.changeTurn();
         $("#players h1").text("Player" + " " + game.whoseTurn().mark + "'s Turn!");
         $("body").removeClass();
         $("body").toggleClass(game.whoseTurn().mark);
+        if (game.winner()) {
+          $("#players").hide();
+        }
       }
     });
 
     $("#bottom-right").click(function() {
-      if (!(board.isMarked(2, 2))) {
-        game.board.mark(2, 2, game.whoseTurn().mark)
-        $("#bottom-right").text(game.whoseTurn().mark)
-        if (game.winner()) {
-          $("#results").slideDown("slow")
-          $("#winner").text("Player" + " " + game.whoseTurn().mark + " WINS!")
+      if ((!(board.isMarked(2, 2))) && (game.winner() === false))  {
+        game.board.mark(2, 2, game.whoseTurn().mark);
+        $("#bottom-right").text(game.whoseTurn().mark);
+        if ((game.winner()) === "Draw") {
+          $("#results").slideDown("slow");
+          $("#winner").text("It's a Draw!");
+        } else if (game.winner()) {
+          $("#results").slideDown("slow");
+          $("#winner").text("Player" + " " + game.whoseTurn().mark + " WINS!");
         }
-        game.changeTurn()
+        game.changeTurn();
         $("#players h1").text("Player" + " " + game.whoseTurn().mark + "'s Turn!");
         $("body").removeClass();
         $("body").toggleClass(game.whoseTurn().mark);
+        if (game.winner()) {
+          $("#players").hide();
+        }
       }
     });
 
+
     $("button#reset").click(function() {
       location.reload();
-      // $("button#play").click();
-
     });
   });
-
-})
+});

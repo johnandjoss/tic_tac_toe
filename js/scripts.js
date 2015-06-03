@@ -2,16 +2,16 @@
 
 function Player(mark, active) {
   this.mark = mark
-  this.active = active
+  this.isActive = active
 };
 
 //toggleTurn will switch a player's active state to the opposite of its current
 
 Player.prototype.toggleTurn = function() {
-  if (this.active === false) {
-    this.active = true
+  if (this.isActive === false) {
+    this.isActive = true
   } else {
-    this.active = false
+    this.isActive = false
   }
 };
 
@@ -56,3 +56,54 @@ Board.prototype.isMarked = function (xcoord, ycoord) {
     return false;
   }
 };
+
+//
+
+function Game(boardSize) {
+  var player1 = new Player("X", true);
+  var player2 = new Player("O", false);
+  var board = new Board(boardSize);
+  this.player1 = player1
+  this.player2 = player2
+  this.board = board
+};
+
+Game.prototype.whoseTurn = function () {
+   if (this.player1.isActive){
+     return this.player1
+   } else {
+     return this.player2
+   }
+};
+
+Game.prototype.changeTurn = function () {
+  this.player1.toggleTurn();
+  this.player2.toggleTurn();
+};
+
+Game.prototype.winner = function() {
+  var board = this.board.board
+  var winner = false
+  if (((board[0][0]) === board[1][0]) && ((board[2][0])) === (board[0][0])) {
+    if (this.player1.mark === board[0][0]) {
+      winner = this.player1
+    } else if (this.player2.mark === board[0][0]){
+      winner = this.player2
+    }
+  }
+  if (((board[0][1]) === board[1][1]) && ((board[2][1])) === (board[0][1])) {
+    if(this.player1.mark === board[0][1]) {
+      winner = this.player1
+    } else if (this.player2.mark === board[0][1]){
+      winner = this.player2
+    }
+  }
+  if (((board[0][2]) === board[1][2]) && ((board[2][2])) === (board[0][2])) {
+    if(this.player1.mark === board[0][2]) {
+      winner = this.player1
+    } else if (this.player2.mark === board[0][2]){
+      winner = this.player2
+    }
+  }
+  return winner
+}

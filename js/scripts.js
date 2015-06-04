@@ -67,14 +67,7 @@ Game.prototype.whoseTurn = function () {
      return this.player2;
    }
 };
-Game.prototype.computerPlay = function () {
-  if(this.player2.isActive) {
-    var xGuess = Math.floor(Math.random() * 3);
-    var yGuess = Math.floor(Math.random() * 3);
-    alert(xGuess);
-    alert(yGuess);
-  }
-};
+
 //changeTurn will change toggle both player's active check
 
 Game.prototype.changeTurn = function () {
@@ -159,9 +152,7 @@ var yGuess;
       game.changeTurn()
 
       if (game.whoseTurn().mark === "O") {
-
         compuTurn();
-        alert("o turn");
       }
 
       $("#players h1").text("Player" + " " + game.whoseTurn().mark + "'s Turn!");
@@ -189,9 +180,7 @@ var yGuess;
       game.changeTurn()
 
       if (game.whoseTurn().mark === "O") {
-
         compuTurn();
-        alert("o turn");
       }
 
       $("#players h1").text("Player" + " " + game.whoseTurn().mark + "'s Turn!");
@@ -218,9 +207,7 @@ var yGuess;
         game.changeTurn();
 
         if (game.whoseTurn().mark === "O") {
-
           compuTurn();
-          alert("o turn");
         }
 
         $("#players h1").text("Player" + " " + game.whoseTurn().mark + "'s Turn!");
@@ -247,9 +234,7 @@ var yGuess;
         game.changeTurn();
 
         if (game.whoseTurn().mark === "O") {
-
           compuTurn();
-          alert("o turn");
         }
 
         $("#players h1").text("Player" + " " + game.whoseTurn().mark + "'s Turn!");
@@ -276,9 +261,7 @@ var yGuess;
         game.changeTurn();
 
         if (game.whoseTurn().mark === "O") {
-
           compuTurn();
-          alert("o turn");
         }
 
         $("#players h1").text("Player" + " " + game.whoseTurn().mark + "'s Turn!");
@@ -305,9 +288,7 @@ var yGuess;
         game.changeTurn();
 
         if (game.whoseTurn().mark === "O") {
-
           compuTurn();
-          alert("o turn");
         }
 
         $("#players h1").text("Player" + " " + game.whoseTurn().mark + "'s Turn!");
@@ -334,9 +315,7 @@ var yGuess;
         game.changeTurn();
 
         if (game.whoseTurn().mark === "O") {
-
           compuTurn();
-          alert("o turn");
         }
 
         $("#players h1").text("Player" + " " + game.whoseTurn().mark + "'s Turn!");
@@ -363,9 +342,7 @@ var yGuess;
         game.changeTurn();
 
         if (game.whoseTurn().mark === "O") {
-
          compuTurn();
-         alert("o turn");
         }
 
         $("#players h1").text("Player" + " " + game.whoseTurn().mark + "'s Turn!");
@@ -394,7 +371,6 @@ var yGuess;
         if (game.whoseTurn().mark === "O") {
 
           compuTurn();
-          alert("o turn");
         }
 
         $("#players h1").text("Player" + " " + game.whoseTurn().mark + "'s Turn!");
